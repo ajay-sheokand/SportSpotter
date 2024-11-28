@@ -1,2 +1,2 @@
 ﻿# SportSpotter
-Demo : https://aymksen.github.io/SportSpotter
+Demo : https://ajay-sheokand.github.io/SportSpotter/tree/1.0
