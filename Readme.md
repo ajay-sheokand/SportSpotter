@@ -1,2 +1,7 @@
-Lets Do it Guyz, 
-Make sure to not messuup everything
+Team members:
+Ajay
+Aymen
+Faith
+Ousama
+
+We will write this later
