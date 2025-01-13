@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportspotter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="btn btn-outline-secondary me-3" id="toggle-sidebar">☰</button>
+            <div class="d-flex">
+                <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar with Events -->
+    <div class="sidebar" id="sidebar">
+        <div class="event-column" id="events-container">
+            <h5 class="p-3">Events</h5>
+            <div class="event-card">
+                <h6>Event Title 1</h6>
+                <p>Short description of the event. Location and time included.</p>
+            </div>
+            <span class="close-btn" id="close-events">&times;</span>
+        </div>
+    </div>
+
+    <!-- Sports Icons -->
+    <div class="icon-column">
+        <div class="sport-icon" data-sport="soccer">
+            <img src="icons/football-icon.png" alt="Football Icon">
+        </div>
+        <div class="sport-icon" data-sport="tennis">
+            <img src="icons/tennis-icon.png" alt="Tennis Icon">
+        </div>
+        <div class="sport-icon" data-sport="table_tennis">
+            <img src="icons/table_tennis.png" alt="table_tennis Icon">
+        </div>
+        <div class="sport-icon" data-sport="boules">
+            <img src="icons/boules.png" alt="boules Icon">
+        </div>
+        <div class="sport-icon" data-sport="speckbrett">
+            <img src="icons/speckbrett.png" alt="speckbrett Icon">
+        </div>
+        <div class="sport-icon" data-sport="skateboard">
+            <img src="icons/skateboard.png" alt="skateboard Icon">
+        </div>
+        <div class="sport-icon" data-sport="basketball">
+            <img src="icons/basketball.png" alt="basketball Icon">
+        </div>
+        <div class="sport-icon" data-sport="beachvolleyball">
+            <img src="icons/beachvolleyball.png" alt="beachvolleyball Icon">
+        </div>
+        <div class="sport-icon" data-sport="team_handball">
+            <img src="icons/team_handball.png" alt="team_handball">
+        </div>
+        <div class="sport-icon" data-sport="equestrian">
+            <img src="icons/equestrian.png" alt="equestrian">
+        </div>
+        <div class="sport-icon" data-sport="archery">
+            <img src="icons/archery.png" alt="archery">
+        </div>
+        <div class="sport-icon" data-sport="paintball">
+            <img src="icons/paintball.png" alt="paintball">
+        </div>
+    </div>
+    <!-- Map Area -->
+    <div class="map-area" id="map-area"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="scripts.js">
+    </script>
+</body>
+</html>
+

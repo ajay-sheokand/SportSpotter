@@ -1,0 +1,124 @@
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/*navbar styling*/
+.navbar {
+    z-index: 1000;
+}
+.d-flex{
+    width:20%;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 300px;
+    background-color: #f8f9fa;
+    height: 100vh;
+    position: fixed;
+    padding-top: 1rem;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+.sidebar-closed {
+    transform: translateX(-100%);
+}
+
+/* Events Section as the sidebar */
+.event-column {
+    margin-left: 50px;
+    background-color: #fff;
+    height: 100vh;
+}
+.event-card {
+    margin: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+/* sidebar Icons */
+.icon-column {
+    position: fixed;
+    left: 0;
+    width: 70px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    height: 100vh;
+    width: 50px;
+    border-right: 1px solid rgba(74, 73, 73, 0.095) ;
+}
+
+.sport-icon {
+    margin-bottom: 20px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 8px;
+}
+
+.sport-icon:hover {
+    transform: scale(1.1); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+}
+.sport-icon img {
+    width: 20px; 
+    height: auto;
+}
+
+.sport-icon.selected {
+    background-color: #f0f0f0; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Map styling */
+.map-area {
+    margin-left: 300px;
+    height: 100vh;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+}
+
+.map-area-full {
+    margin-left: 0;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .map-area {
+        margin-left: 0;
+    }
+}
+.sidebar-closed {
+    display: none;
+}
+.map-area-full {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
