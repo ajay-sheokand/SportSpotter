@@ -1,30 +1,61 @@
-//Sidebar Toggle section
-const sidebar = document.getElementById('sidebar');
+// Sidebar Toggle section
+const eventsContainer = document.getElementById('events-container');
 const mapArea = document.getElementById('map-area');
 const toggleSidebar = document.getElementById('toggle-sidebar');
-const closeSidebar = document.getElementById('close-events');
+const closeEvents = document.getElementById('close-events');
 
-
+// Toggle Events Section visibility
 toggleSidebar.addEventListener('click', () => {
-    sidebar.classList.toggle('sidebar-closed');
-    mapArea.classList.toggle('map-area-full');
+    const isHidden = eventsContainer.classList.toggle('hidden');
+    if (isHidden) {
+        mapArea.classList.add('map-area-full');
+    } else {
+        mapArea.classList.remove('map-area-full');
+    }
 });
 
-closeSidebar.addEventListener('click', () => {
-    sidebar.classList.add('sidebar-closed');
+// Close Events Section
+closeEvents.addEventListener('click', () => {
+    eventsContainer.classList.add('hidden');
     mapArea.classList.add('map-area-full');
 });
 
 
 
 
-
-
-
 //Display Map
 const map = L.map('map-area').setView([51.960664, 7.600351], 13); 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+
+//Defining the OSM and Satellite BaseMaps
+    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    });
+
+    const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '&copy; <a href="https://www.esri.com/">ESRI</a>',
+    });
+
+    let currentLayer = osmLayer;
+    currentLayer.addTo(map);
+
+    // toggle the basemaps
+    document.getElementById('toggle-btn').addEventListener('click', function() {
+        if (currentLayer === osmLayer) {
+            map.removeLayer(osmLayer); 
+            satelliteLayer.addTo(map);
+            currentLayer = satelliteLayer; 
+            this.textContent = 'Switch to OSM'; 
+        } else {
+            map.removeLayer(satelliteLayer); 
+            osmLayer.addTo(map); 
+            currentLayer = osmLayer; 
+            this.textContent = 'Switch to Satellite';
+        }
+    });
+
+
+   
+  
+
 
 
