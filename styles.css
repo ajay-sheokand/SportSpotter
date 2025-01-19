@@ -88,7 +88,7 @@ body {
 /* Map styling */
 .map-area {
     margin-left: 300px;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     transition: margin-left 0.3s ease;
 }
@@ -96,21 +96,29 @@ body {
 .map-area-full {
     margin-left: 0;
 }
-
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    .map-area {
-        margin-left: 0;
-    }
+.toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  #toggle-btn img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
-.sidebar-closed {
-    display: none;
-}
-.map-area-full {
-    width: 100%;
-}
+  .toggle-btn:hover {
+     border: 1px solid white;
+  }
 
 
 
