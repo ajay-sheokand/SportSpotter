@@ -1,26 +1,16 @@
-// Sidebar Toggle section
-const eventsContainer = document.getElementById('events-container');
-const mapArea = document.getElementById('map-area');
-const toggleSidebar = document.getElementById('toggle-sidebar');
-const closeEvents = document.getElementById('close-events');
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const mapArea = document.getElementById('map-area');
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    const closeBtn = document.getElementById('close-events');
 
-// Toggle Events Section visibility
-toggleSidebar.addEventListener('click', () => {
-    const isHidden = eventsContainer.classList.toggle('hidden');
-    if (isHidden) {
-        mapArea.classList.add('map-area-full');
-    } else {
-        mapArea.classList.remove('map-area-full');
+    function toggleSidebar() {
+        sidebar.classList.toggle('closed');
+        mapArea.classList.toggle('expanded');
     }
-});
 
-// Close Events Section
-closeEvents.addEventListener('click', () => {
-    eventsContainer.classList.add('hidden');
-    mapArea.classList.add('map-area-full');
-});
-
-
+    toggleBtn.addEventListener('click', toggleSidebar);
+    closeBtn.addEventListener('click', toggleSidebar);
 
 
 //Display Map
@@ -39,7 +29,6 @@ const map = L.map('map-area').setView([51.960664, 7.600351], 13);
     currentLayer.addTo(map);
 
     // toggle the basemaps
-
     document.getElementById('toggle-btn').style.backgroundImage = "url('satellite-preview.png')"; 
 
     document.getElementById('toggle-btn').addEventListener('click', function() {
@@ -55,6 +44,7 @@ const map = L.map('map-area').setView([51.960664, 7.600351], 13);
             this.innerHTML = '<img src="satellite-preview.png" alt="OSM Layer">';
         }
     });
+});
 
 
    
