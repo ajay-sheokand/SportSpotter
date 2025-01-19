@@ -39,17 +39,20 @@ const map = L.map('map-area').setView([51.960664, 7.600351], 13);
     currentLayer.addTo(map);
 
     // toggle the basemaps
+
+    document.getElementById('toggle-btn').style.backgroundImage = "url('satellite-preview.png')"; 
+
     document.getElementById('toggle-btn').addEventListener('click', function() {
         if (currentLayer === osmLayer) {
             map.removeLayer(osmLayer); 
             satelliteLayer.addTo(map);
             currentLayer = satelliteLayer; 
-            this.innerHTML = '<img src="satellite-preview.png" alt="Satellite Layer">';
+            this.innerHTML = '<img src="default-preview.png" alt="Satellite Layer">';
         } else {
             map.removeLayer(satelliteLayer); 
             osmLayer.addTo(map); 
             currentLayer = osmLayer; 
-            this.innerHTML = '<img src="default-preview.png" alt="OSM Layer">';
+            this.innerHTML = '<img src="satellite-preview.png" alt="OSM Layer">';
         }
     });
 
