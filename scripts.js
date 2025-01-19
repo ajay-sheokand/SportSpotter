@@ -44,12 +44,12 @@ const map = L.map('map-area').setView([51.960664, 7.600351], 13);
             map.removeLayer(osmLayer); 
             satelliteLayer.addTo(map);
             currentLayer = satelliteLayer; 
-            this.textContent = 'Switch to OSM'; 
+            this.innerHTML = '<img src="satellite-preview.png" alt="Satellite Layer">';
         } else {
             map.removeLayer(satelliteLayer); 
             osmLayer.addTo(map); 
             currentLayer = osmLayer; 
-            this.textContent = 'Switch to Satellite';
+            this.innerHTML = '<img src="default-preview.png" alt="OSM Layer">';
         }
     });
 
