@@ -171,15 +171,36 @@ document.addEventListener('DOMContentLoaded', function () {
         archery: 'icons/archery.png'
     };
 
-    function createIcon(sport) {
+    function getIconSize(zoomLevel) {
+        // Base size at zoom level 13
+        const baseSize = 22;
+        // Adjust size based on zoom level
+        if (zoomLevel >= 16) return baseSize * 2;      // Very close
+        if (zoomLevel >= 15) return baseSize * 1.5;    // Close
+        if (zoomLevel >= 14) return baseSize * 1.25;   // Medium
+        return baseSize;                               // Default size
+    }
+    function createIcon(sport, zoomLevel = 13) {
         const iconUrl = sportIconMapping[sport] || 'default-icon.png';
+        const size = getIconSize(zoomLevel);
         return L.icon({
             iconUrl: iconUrl,
-            iconSize: [22, 22],
-            iconAnchor: [11, 11], // Updated icon anchor
-            popupAnchor: [0, -11]
+            iconSize: [size, size],
+            iconAnchor: [size / 2, size / 2], // Updated icon anchor
+            popupAnchor: [0, -size / 2]
         });
     }
+
+    // Add this after your map initialization
+    map.on('zoomend', () => {
+        const currentZoom = map.getZoom();
+        Object.keys(markers).forEach(sport => {
+            markers[sport].forEach(marker => {
+                const newIcon = createIcon(sport, currentZoom);
+                marker.setIcon(newIcon);
+            });
+        });
+    });
 
     function getCentroid(coords) {
         let sumLat = 0;
