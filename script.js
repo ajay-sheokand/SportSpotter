@@ -180,6 +180,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (zoomLevel >= 14) return baseSize * 1.25;   // Medium
         return baseSize;                               // Default size
     }
+
+    // custom icon size
     function createIcon(sport, zoomLevel = 13) {
         const iconUrl = sportIconMapping[sport] || 'default-icon.png';
         const size = getIconSize(zoomLevel);
@@ -191,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Add this after your map initialization
+    // initialization
     map.on('zoomend', () => {
         const currentZoom = map.getZoom();
         Object.keys(markers).forEach(sport => {
