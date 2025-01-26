@@ -207,12 +207,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function getPopupContent(feature) {
         const properties = feature.properties;
         const coords = getMarkerCoordinates(feature);
+
+        ///////////////////////////
+        // 2. ${properties.lit ? `<p>Lit: Yes</p>` : ''}
+        // 3${properties.ref ? `<p>Ref: ${properties.ref}</p>` : ''}
+        // 4${properties['addr:street'] ? `<p>Address: ${properties['addr:street']}, ${properties['addr:housenumber']}, ${properties['addr:postcode']} ${properties['addr:city']}</p>` : ''}
+        ////////////////////////////
         return `
             <h3>${properties.sport}</h3>
             <p>Surface: ${properties.surface || 'N/A'}</p>
-            ${properties.lit ? `<p>Lit: Yes</p>` : ''}
-            ${properties.ref ? `<p>Ref: ${properties.ref}</p>` : ''}
-            ${properties['addr:street'] ? `<p>Address: ${properties['addr:street']}, ${properties['addr:housenumber']}, ${properties['addr:postcode']} ${properties['addr:city']}</p>` : ''}
+            <p>Lit: ${properties.lit ? 'Yes' : 'No'}</p>
+            <p>Address: ${properties['addr:street'] || 'N/A'}, ${properties['addr:housenumber'] || 'N/A'}, ${properties['addr:postcode'] || 'N/A'} ${properties['addr:city'] || 'N/A'}</p>
             <button class="navigate-btn" data-lat="${coords[0]}" data-lon="${coords[1]}">Navigate ➤</button>
         `;
     }
