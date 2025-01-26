@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const searchBar = document.querySelector('.search-bar input');
     const sportIcons = document.querySelectorAll('.sport-icon');
     const map = L.map('map').setView([51.960665, 7.626135], 13); // Center on Münster, Germany
@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to set the map theme
     function setMapTheme(theme) {
-        if (theme === 'light') {
-            map.removeLayer(darkLayer);
-            lightLayer.addTo(map);
-        } else if (theme === 'dark') {
+        if (theme === 'dark') {
             map.removeLayer(lightLayer);
             darkLayer.addTo(map);
+        } else if (theme === 'light') {
+            map.removeLayer(darkLayer);
+            lightLayer.addTo(map);
         }
     }
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('theme-toggle').style.backgroundImage = 'url(' + lightImage + ')';
 
     // Event listener for theme toggle
-    document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.getElementById('theme-toggle').addEventListener('click', function () {
         if (currentTheme === 'light') {
             currentTheme = 'dark';
             this.style.backgroundImage = 'url(' + darkImage + ')';
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const LocationControl = L.Control.extend({
         options: { position: 'bottomright' },
 
-        onAdd: function(map) {
+        onAdd: function (map) {
             const container = L.DomUtil.create('div', 'leaflet-control location-control');
             const button = L.DomUtil.create('a', 'leaflet-control-location', container);
             button.href = '#';
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         iconAnchor: [10, 10]
                     });
 
-                    userLocationMarker = L.marker([latitude, longitude], { 
+                    userLocationMarker = L.marker([latitude, longitude], {
                         icon: userIcon,
                         zIndexOffset: 1000
                     }).addTo(map);
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 },
                 (error) => {
-                    switch(error.code) {
+                    switch (error.code) {
                         case error.PERMISSION_DENIED:
                             alert("Location access denied. Please enable location permissions.");
                             break;
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     iconAnchor: [10, 10]
                 });
 
-                userLocationMarker = L.marker([latitude, longitude], { 
+                userLocationMarker = L.marker([latitude, longitude], {
                     icon: userIcon,
                     zIndexOffset: 1000
                 }).addTo(map);
@@ -241,9 +241,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     marker.bindPopup(popupContent, { className: 'custom-popup' });
                     markers[sport].push(marker); // Add to sport-specific array
 
-                    const polygon = L.polygon(feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]), { color: 'blue', fillOpacity: 0.2 }); // Swap lat and lon for polygon
-                    polygon.bindPopup(popupContent, { className: 'custom-popup' });
-                    markers[sport].push(polygon);
+                    //////// Uncomment the following code to display polygons as well////////
+                    // const polygon = L.polygon(feature.geometry.coordinates[0].map(coord => [coord[1], coord[0]]), { color: 'blue', fillOpacity: 0 }); // Swap lat and lon for polygon
+                    // polygon.bindPopup(popupContent, { className: 'custom-popup' });
+                    // markers[sport].push(polygon);
                 }
             });
         })
@@ -254,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show markers for the selected sport and zoom to their bounds
     sportIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
+        icon.addEventListener('click', function () {
             const sport = this.getAttribute('data-sport');
 
             markerLayerGroup.clearLayers();
@@ -277,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    searchBar.addEventListener('input', function() {
+    searchBar.addEventListener('input', function () {
         const searchTerm = searchBar.value.toLowerCase();
         sportIcons.forEach(icon => {
             const sportName = icon.getAttribute('data-sport');
@@ -296,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Event listener for "Navigate" button clicks
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (event.target.classList.contains('navigate-btn')) {
             const lat = event.target.getAttribute('data-lat');
             const lon = event.target.getAttribute('data-lon');
@@ -339,42 +340,42 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('showFormBtn').addEventListener('click', showLoginForm);
-document.getElementById('registerLink').addEventListener('click', function(e) {
-  e.preventDefault();
-  showRegisterForm();
+document.getElementById('registerLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    showRegisterForm();
 });
-document.getElementById('loginLink').addEventListener('click', function(e) {
-  e.preventDefault();
-  showLoginForm();
+document.getElementById('loginLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    showLoginForm();
 });
 
-document.addEventListener('click', function(event) {
-  var formContainer = document.getElementById('formContainer');
-  var registerFormContainer = document.getElementById('registerFormContainer');
-  var showFormBtn = document.getElementById('showFormBtn');
-  var registerLink = document.getElementById('registerLink');
-  var loginLink = document.getElementById('loginLink');
+document.addEventListener('click', function (event) {
+    var formContainer = document.getElementById('formContainer');
+    var registerFormContainer = document.getElementById('registerFormContainer');
+    var showFormBtn = document.getElementById('showFormBtn');
+    var registerLink = document.getElementById('registerLink');
+    var loginLink = document.getElementById('loginLink');
 
-  if (
-    !formContainer.contains(event.target) &&
-    !registerFormContainer.contains(event.target) &&
-    !showFormBtn.contains(event.target) &&
-    !registerLink.contains(event.target) &&
-    !loginLink.contains(event.target)
-  ) {
-    formContainer.style.display = 'none';
-    registerFormContainer.style.display = 'none';
-  }
+    if (
+        !formContainer.contains(event.target) &&
+        !registerFormContainer.contains(event.target) &&
+        !showFormBtn.contains(event.target) &&
+        !registerLink.contains(event.target) &&
+        !loginLink.contains(event.target)
+    ) {
+        formContainer.style.display = 'none';
+        registerFormContainer.style.display = 'none';
+    }
 });
 
 function showLoginForm() {
     document.getElementById('formContainer').style.display = 'flex';
     document.getElementById('registerFormContainer').style.display = 'none';
     document.getElementById('formContainer').querySelector('input').focus();
-  }
-  
-  function showRegisterForm() {
+}
+
+function showRegisterForm() {
     document.getElementById('registerFormContainer').style.display = 'flex';
     document.getElementById('formContainer').style.display = 'none';
     document.getElementById('registerFormContainer').querySelector('input').focus();
-  }
+}
