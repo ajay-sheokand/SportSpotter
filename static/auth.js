@@ -66,9 +66,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 // Signup handler
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('signupEmail').value;
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('signupPassword').value;
+    const email = document.getElementById('signup_email').value;
+    const username = document.getElementById('signup_username').value;
+    const password = document.getElementById('signup_password').value;
+    const confirm_password = document.getElementById('confirm_password').value;
 
     try {
         const response = await fetch(sign_up_api, {
@@ -76,7 +77,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, username, password }),
+            body: JSON.stringify({ email, username, password, confirm_password }),
         });
 
         if (response.ok) {
@@ -104,7 +105,7 @@ document.getElementById('authOverlay').addEventListener('click', (e) => {
 // Update UI for logged-in user
 function updateUIForLoggedInUser(user) {
     const authButton = document.querySelector('.button-3');
-    authButton.textContent = `Welcome, ${user.username}`;
+    authButton.textContent = `${user.username}`;
     authButton.onclick = logout;
 
     // Add a logout option
