@@ -51,11 +51,11 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         if (response.ok) {
             const data = await response.json();
             currentUser = data.user;
-            updateUIForLoggedInUser(data.user);
+            updateUIForLoggedInUser(currentUser);
             hideAuthPopup();
         } else {
             const errorData = await response.json();
-            alert(errorData.message || 'Login failed. Please check your credentials.');
+            alert(errorData.detail || 'Login failed. Please check your credentials.');
         }
     } catch (error) {
         console.error("Login Failed:", error);
@@ -82,12 +82,12 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 
         if (response.ok) {
             const data = await response.json();
-            currentUser = data.user;
-            updateUIForLoggedInUser(data.user);
+            currentUser = data;
+            updateUIForLoggedInUser(currentUser);
             hideAuthPopup();
         } else {
             const errorData = await response.json();
-            alert(errorData.message || 'Signup failed. Please try again.');
+            alert(errorData.detail || 'Signup failed. Please try again.');
         }
     } catch (error) {
         console.error('Signup error:', error);
