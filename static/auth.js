@@ -50,7 +50,11 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
         if (response.ok) {
             const data = await response.json();
-            currentUser = data.user;
+            currentUser = { 
+                ...data.user,
+                token: data.access_token
+            };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser)); // Store
             updateUIForLoggedInUser(currentUser);
             hideAuthPopup();
         } else {
@@ -82,7 +86,11 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 
         if (response.ok) {
             const data = await response.json();
-            currentUser = data;
+            currentUser = {
+                ...data.user,
+                token: data.access_token
+            };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser)); // Store
             updateUIForLoggedInUser(currentUser);
             hideAuthPopup();
         } else {
@@ -108,6 +116,11 @@ function updateUIForLoggedInUser(user) {
     authButton.textContent = `${user.username}`;
     authButton.onclick = logout;
 
+    const addEventButton = document.querySelector('.add-event-btn');
+    if (addEventButton) {
+        addEventButton.style.display = 'block'; // Ensure this is set
+    }
+    
     // Add a logout option
     const logoutBtn = document.createElement('button');
     logoutBtn.className = 'button-3';
@@ -118,6 +131,7 @@ function updateUIForLoggedInUser(user) {
 
 // Logout function
 function logout() {
+    localStorage.removeItem('currentUser'); //clear
     currentUser = null;
     const authButton = document.querySelector('.button-3');
     authButton.textContent = 'SignIn';
@@ -128,4 +142,10 @@ function logout() {
     if (logoutBtn && logoutBtn.textContent === 'Logout') {
         logoutBtn.remove();
     }
+}
+
+// On page load
+let currentUser = JSON.parse(localStorage.getItem('currentUser')); // Restore
+if (currentUser){ 
+    updateUIForLoggedInUser(currentUser);
 }

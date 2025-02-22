@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    fetchEvents(); // Load events when the page loads
     const searchBar = document.querySelector('.search-bar input');
     const sportIcons = document.querySelectorAll('.sport-icon');
     const map = L.map('map').setView([51.960665, 7.626135], 13); // Center on Münster, Germany
