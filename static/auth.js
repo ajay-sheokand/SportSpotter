@@ -118,9 +118,15 @@ function updateUIForLoggedInUser(user) {
 
     const addEventButton = document.querySelector('.add-event-btn');
     if (addEventButton) {
-        addEventButton.style.display = 'block'; // Ensure this is set
+        addEventButton.style.display = 'block';
     }
-    
+
+    // Add these lines to open the sidebar
+    const sidebar = document.querySelector('.events-sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
+    sidebar.classList.add('active');
+    menuToggle.classList.add('active');
+
     // Add a logout option
     const logoutBtn = document.createElement('button');
     logoutBtn.className = 'button-3';
@@ -137,6 +143,11 @@ function logout() {
     authButton.textContent = 'SignIn';
     authButton.onclick = () => showAuthPopup('signup');
 
+    // Hide add event button
+    const addEventButton = document.querySelector('.add-event-btn');
+    if (addEventButton) {
+        addEventButton.style.display = 'none';
+    }
     // Remove logout button
     const logoutBtn = authButton.parentNode.querySelector('button:last-child');
     if (logoutBtn && logoutBtn.textContent === 'Logout') {

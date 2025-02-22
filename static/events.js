@@ -1,8 +1,12 @@
-const update_events = "";
-
-
 // create event only for logged in users
 async function addEvent(eventData) {
+    // Check if user is logged in
+    if (!currentUser || !currentUser.token) {
+        alert("Please login first to add events!");
+        showAuthPopup('login'); 
+        return;  
+    }
+
     try {
         const response = await fetch('http://localhost:8000/api/events', {
             method: 'POST',
@@ -50,17 +54,52 @@ async function fetchEvents() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const events = await response.json();
-        displayEvents(events);
+        if (!events || events.length === 0) {
+            console.log("No events found.");
+            displayNoEventsMessage(); 
+        } else {
+            displayEvents(events);
+        }
     } catch (error) {
         console.error('Fetch error:', error);
         alert('Failed to load events. Please try again.');
     }
 }
+// for No events found
+function displayNoEventsMessage() {
+    const eventsContainer = document.querySelector('.events-sidebar');
+    eventsContainer.innerHTML = `
+        <div class="event-card">
+            <div class="event-date">Saturday, March 16 • 3:00 PM</div>
+            <h3 class="event-title">Sports Name</h3>
+            <div class="event-location">Location</div>
+            <span class="event-sport soccer">No Sports available</span>
+        </div> 
+        <div class="no-events-message">
+            <p>No events found. Be the first to add one!</p>
+        </div>
+    `;
 
+    // Add the "Add Event" button dynamically
+    const addEventButton = document.createElement('button');
+    addEventButton.className = 'add-event-btn';
+    addEventButton.textContent = 'Add Event';
+    addEventButton.onclick = showAddEventForm;
+    eventsContainer.appendChild(addEventButton);
+}
 
+//for events available
 function displayEvents(events) {
     const eventsContainer = document.querySelector('.events-sidebar');
     eventsContainer.innerHTML = ''; // Clear existing events
+
+
+    // Add the "Add Event" button
+    const addEventButton = document.createElement('button');
+    addEventButton.className = 'add-event-btn';
+    addEventButton.textContent = 'Add Event';
+    addEventButton.onclick = showAddEventForm;
+    eventsContainer.appendChild(addEventButton);
 
     events.forEach(event => {
         const eventCard = document.createElement('div');
@@ -158,43 +197,4 @@ function showAddEventForm() {
 
 function hideAddEventForm() {
     document.getElementById('addEventModal').style.display = 'none';
-}
-
-// User logged in or not
-function updateUIForLoggedInUser(user) {
-    const authButton = document.querySelector('.button-3');
-    authButton.textContent = `${user.username}`;
-    authButton.onclick = logout;
-
-    // Show the "Add Event" button if the user is logged in
-    const addEventButton = document.querySelector('.add-event-btn');
-    if (addEventButton) {
-        addEventButton.style.display = 'block';
-    }
-
-    // Add a logout option
-    const logoutBtn = document.createElement('button');
-    logoutBtn.className = 'button-3';
-    logoutBtn.textContent = 'Logout';
-    logoutBtn.onclick = logout;
-    authButton.parentNode.appendChild(logoutBtn);
-}
-
-function logout() {
-    currentUser = null;
-    const authButton = document.querySelector('.button-3');
-    authButton.textContent = 'SignIn';
-    authButton.onclick = () => showAuthPopup('signup');
-
-    // Hide the "Add Event" button when the user logs out
-    const addEventButton = document.querySelector('.add-event-btn');
-    if (addEventButton) {
-        addEventButton.style.display = 'none';
-    }
-
-    // Remove logout button
-    const logoutBtn = authButton.parentNode.querySelector('button:last-child');
-    if (logoutBtn && logoutBtn.textContent === 'Logout') {
-        logoutBtn.remove();
-    }
 }

@@ -528,6 +528,7 @@ body {
 
 /* Fixed Add Event Button */
 .add-event-btn {
+  display: block; /* !important; */
   position: sticky;
   bottom: 20px;
   background: rgba(255, 255, 255, 0.9);
@@ -544,7 +545,7 @@ body {
   border: none;
   font-family: inherit;
   z-index: 1;
-  margin: 20px 20px 0 20px;
+  margin: 20px auto;
   width: calc(100% - 40px);
   font-size: 16px;
   font-weight: 600;
@@ -717,3 +718,7 @@ body {
 #addEventModal .close:hover {
   color: #000;
 }
+
+/* .add-event-btn {
+  display: none; /* Hidden by default 
+} */
