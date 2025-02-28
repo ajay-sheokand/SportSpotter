@@ -12,7 +12,7 @@ async function addEvent(eventData) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${currentUser.token}` // Include auth token
+                'Authorization': `Bearer ${currentUser.token}`
             },
             body: JSON.stringify(eventData)
         });
@@ -80,7 +80,7 @@ function displayNoEventsMessage() {
         </div>
     `;
 
-    // Add the "Add Event" button dynamically
+    // Add events button dynamically
     const addEventButton = document.createElement('button');
     addEventButton.className = 'add-event-btn';
     addEventButton.textContent = 'Add Event';
@@ -94,7 +94,7 @@ function displayEvents(events) {
     eventsContainer.innerHTML = ''; // Clear existing events
 
 
-    // Add the "Add Event" button
+    // add button
     const addEventButton = document.createElement('button');
     addEventButton.className = 'add-event-btn';
     addEventButton.textContent = 'Add Event';
@@ -120,7 +120,7 @@ function displayEvents(events) {
 
 
 
-//Edit events by owed users:
+//Fix this code
 async function editEvent(eventId, updatedData) {
     try {
         const response = await fetch(`http://localhost:8000/api/events/${eventId}`, {
@@ -170,7 +170,7 @@ document.getElementById('editEventForm').addEventListener('submit', (e) => {
     editEvent(eventId, updatedData);
 });
 
-//Deletion of Event by owed user:
+//Fix this code too
 async function deleteEvent(eventId) {
     try {
         const response = await fetch(`http://localhost:8000/api/events/${eventId}`, {

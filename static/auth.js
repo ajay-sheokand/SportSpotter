@@ -113,7 +113,7 @@ document.getElementById('authOverlay').addEventListener('click', (e) => {
 // Update UI for logged-in user
 function updateUIForLoggedInUser(user) {
     const authButton = document.querySelector('.button-3');
-    authButton.textContent = `${user.username}`;
+    authButton.textContent = `${user.username}, Logout`;
     authButton.onclick = logout;
 
     const addEventButton = document.querySelector('.add-event-btn');
@@ -127,12 +127,12 @@ function updateUIForLoggedInUser(user) {
     sidebar.classList.add('active');
     menuToggle.classList.add('active');
 
-    // Add a logout option
-    const logoutBtn = document.createElement('button');
-    logoutBtn.className = 'button-3';
-    logoutBtn.textContent = 'Logout';
-    logoutBtn.onclick = logout;
-    authButton.parentNode.appendChild(logoutBtn);
+
+    // const logoutBtn = document.createElement('button');
+    // logoutBtn.className = 'button-3';
+    // logoutBtn.textContent = 'Logout';
+    // logoutBtn.onclick = logout;
+    // authButton.parentNode.appendChild(logoutBtn);
 }
 
 // Logout function
